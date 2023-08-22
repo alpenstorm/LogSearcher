@@ -3,7 +3,7 @@
 
  
 ---------------------------------------------------
-# HOW TO USE
+# How to use
 ---------------------------------------------------
  1. when the program asks for a file location, paste in the location of the log file you want to test. if it is an invalid file, the program will quit
  2. input the search term, eg. the error you want to find
