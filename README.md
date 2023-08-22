@@ -12,3 +12,4 @@
 
 made by alpenstorm
 
+Warning: Use a program such as [Tabby](https://tabby.sh/) to read large files, as the default Windows terminal runs out of space pretty quickly!
