@@ -12,7 +12,7 @@
 # made by alpenstorm
 
 
-# [uncomment/comment] these if you want to [use/not] web searching
+# [uncomment/comment] these if you want to [use/not] remote searching
 #---------------------------------------------------
 #import urllib.request
 #import urllib.parse
@@ -20,7 +20,7 @@
 #---------------------------------------------------
 
 
-# [uncomment/comment] these if you want to [use/not] web searching
+# [uncomment/comment] these if you want to [use/not] remote searching
 #---------------------------------------------------
 fn = input("Enter File Location: ")
 #fn = input("Enter URL: ")
@@ -38,14 +38,45 @@ trm = input("Enter Search Term: ")
 tc = 0
 lc = 0
 
+flcr = input("Create a File? y/n ")
+
+if flcr == 'y':
+    print("WARNING: FILES WILL OVERWRITE IF THEY HAVE THE SAME NAME")
+    filen = input("File Name: ")
+    foldern = input("File Location: ")
+    with open(foldern + filen + ".lsout", "w") as output:
+        output.write("------OUTPUT FILE CREATED------"+ "\n\n")
+
+        for line in fileHandle:
+            line = line.rstrip()
+            #line = line.decode().strip() # if this is commented, uncomment it to read remote files
+            lc += 1
+            if not trm in line:
+                continue
+            tc += 1
+            output.write(line + "\n\n")
+            print(line + "AT: LINE" + str(lc))
+        
+        output.write("------OUTPUT FILE FINISHED------")
+        
+        print("Total Lines:", lc)
+        print("Terms Found:", tc)
+
+        xt = input("Press [Enter] to exit")
+        
+        if xt == "\n": quit()
+        else: quit()
+
+
+
 for line in fileHandle:
     line = line.rstrip() # if this is commented, uncomment it to read local files
     #line = line.decode().strip() # if this is commented, uncomment it to read remote files
-    lc = lc + 1
+    lc += 1
     if not str(trm) in line: 
         continue
-    tc = tc + 1
-    print(line)
+    tc += 1
+    print(str(line) + "AT: LINE" + str(lc))
 
 
 print("Total Lines:", lc)
