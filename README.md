@@ -3,7 +3,6 @@
 ---------------------------------------------------
  a fast python program for searching large log files for errors
 
- 
 ---------------------------------------------------
 # How to use
 ---------------------------------------------------
@@ -20,10 +19,12 @@
 4. the program will find all the instances of that error message in the log file. if there are no instances of the term, you will be prompted to exit
 
 5. after the program is finished with finding the instances, it will prompt to exit
+
 ---------------------------------------------------
 # Contact
 ---------------------------------------------------
 if you have issues with this program, you can contact me on Discord, my tag is alpenstorm there and also on [Reddit](https://www.reddit.com/user/alpenstorm) and [Twitter](https://twitter.com/alpenstorm)
+
 ---------------------------------------------------
 # Help
 ---------------------------------------------------
