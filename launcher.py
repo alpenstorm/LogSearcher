@@ -18,6 +18,7 @@ elif lr == 'l':
             exec(fl.read())
     except:
         print("Local searcher not found, please consult readme!")
+        input("Press [Enter] to exit")
 
 elif lr == 'R':
     try:
@@ -26,6 +27,7 @@ elif lr == 'R':
             exec(fl.read())
     except:
         print("Local searcher not found, please consult readme!")
+        input("Press [Enter] to exit")
 
 elif lr == 'r':
     try:
@@ -34,3 +36,4 @@ elif lr == 'r':
             exec(fl.read())
     except:
         print("Local searcher not found, please consult readme!")
+        input("Press [Enter] to exit")
