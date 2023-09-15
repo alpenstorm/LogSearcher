@@ -32,4 +32,26 @@ if you run out of space, use a program such as [Tabby](https://tabby.sh/) to rea
 
 if the launcher prints out "Local searcher not found, please consult readme!", you have come to the right place. there are a couple of reasons why this error message might come up. first, check if the files in the py/ folder are named "logsearcher-local.py" and "logsearcher-remote.py". if they are named differently, you will get this error. please do not rename these files. if the error comes up again, try redownloading the program from [GitHub](https://github.com/alpenstorm/LogSearcher/releases). if the isssue persists, contact me and I will try to have it sorted out.
 
+if you get a traceback like this:
+
+  File "C:\---\---\---\---\---\LogSearcher\launcher.py", line 8, in <module>
+    exec(fl.read())
+  File "<string>", line 85, in <module>
+  File "C:\---\---\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x8f in position 3846: character maps to <undefined>
+
+or
+
+Traceback (most recent call last):
+  File "C:\---\---\---\---\---\LogSearcher\py\logsearcher-local.py", line 85, in <module>
+    for line in fileHandle:
+  File "C:\---\---\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x8f in position 3846: character maps to <undefined>
+
+this means that the document you're trying to read has a character that Python can't decode. im working on a fix for this, and i'll update the readme when it is done
+
 
