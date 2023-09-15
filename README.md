@@ -40,7 +40,7 @@ if you get a traceback like this:
   File "C:\---\---\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 23, in decode
     return codecs.charmap_decode(input,self.errors,decoding_table)[0]
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeDecodeError: 'charmap' codec can't decode byte 0x8f in position 3846: character maps to <undefined>
+  UnicodeDecodeError: 'charmap' codec can't decode byte 0x8f in position 3846: character maps to <undefined>
 
 or
 
@@ -50,7 +50,7 @@ Traceback (most recent call last):
   File "C:\---\---\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 23, in decode
     return codecs.charmap_decode(input,self.errors,decoding_table)[0]
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeDecodeError: 'charmap' codec can't decode byte 0x8f in position 3846: character maps to <undefined>
+ UnicodeDecodeError: 'charmap' codec can't decode byte 0x8f in position 3846: character maps to <undefined>
 
 this means that the document you're trying to read has a character that Python can't decode. im working on a fix for this, and i'll update the readme when it is done
 
