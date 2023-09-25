@@ -30,6 +30,9 @@ if you have issues with this program, you can contact me on Discord, my tag is a
 ---------------------------------------------------
 if you run out of space, use a program such as [Tabby](https://tabby.sh/) to read large files (if you're not using file exporting, which is recommended), as the default Windows terminal runs out of space pretty quickly!
 
+<<<<<<< HEAD
+if the launcher prints out "Local searcher not found, please consult readme!", you have come to the right place. there are a couple of reasons why this error message might come up. first, check if the files in the py/ folder are named "logsearcher-local.py" and "logsearcher-remote.py". if they are named differently, you will get this error. please do not rename these files. if the error comes up again, try redownloading the program from [GitHub](https://github.com/alpenstorm/LogSearcher/releases). if the isssue persists, contact me and I will try to have it sorted out.
+=======
 if the launcher prints out "Local searcher not found, please consult readme!", you have come to the right place. there are a couple of reasons why this error message might come up. first, check if the files in the py/ folder are named "logsearcher-local.py" and "logsearcher-remote.py". if they are named differently, you will get this error. please do not rename these files. if the error comes up again, try redownloading the program from [GitHub](https://github.com/alpenstorm/LogSearcher/releases). if the isssue persists, contact me and I will try to have it sorted out.
 
 if you get a traceback like this:
@@ -53,5 +56,3 @@ Traceback (most recent call last):
  UnicodeDecodeError: 'charmap' codec can't decode byte 0x8f in position 3846: character maps to <undefined>
 
 this means that the document you're trying to read has a character that Python can't decode. im working on a fix for this, and i'll update the readme when it is done
-
-
