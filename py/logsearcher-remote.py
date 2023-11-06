@@ -49,9 +49,8 @@ if flcr == 'y':
                 print(line + "AT: LINE" + str(lc))
         
             output.write("------OUTPUT FILE FINISHED------")
-        
-            print("Total Lines:", lc)
-            print("Terms Found:", tc)
+
+            print("\nFound", tc, "terms \n In", lc, "lines \n From location", fn, "\n")
 
             xt = input("Press [Enter] to exit")
         
@@ -59,7 +58,7 @@ if flcr == 'y':
             else: quit()
     
     except:
-        os.mkdir(filen)
+        os.mkdir(foldern)
 
         with open(foldern + filen + ".lsout", "w") as output:
             output.write("------OUTPUT FILE CREATED------"+ "\n\n")
@@ -74,9 +73,8 @@ if flcr == 'y':
                 print(line + "AT: LINE" + str(lc))
         
             output.write("------OUTPUT FILE FINISHED------")
-        
-            print("Total Lines:", lc)
-            print("Terms Found:", tc)
+
+            print("\nFound", tc, "terms \n In", lc, "lines \n From location", fn, "\n")
 
             xt = input("Press [Enter] to exit")
         
@@ -93,8 +91,6 @@ for line in fileHandle:
     tc += 1
     print(str(line) + "AT: LINE" + str(lc))
 
-
-print("Total Lines:", lc)
-print("Terms Found:", tc)
+print("\nFound", tc, "terms \n In", lc, "lines \n From location", fn, "\n")
 
 input("Press [Enter] to exit")
