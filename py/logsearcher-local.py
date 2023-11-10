@@ -45,7 +45,7 @@ if flcr == 'y':
                     continue
                 tc += 1
                 output.write(line + "\n\n")
-                print(line + "AT: LINE" + str(lc))
+                print(line + "    AT: LINE " + str(lc))
         
             output.write("------OUTPUT FILE FINISHED------")
         
@@ -69,7 +69,7 @@ if flcr == 'y':
                     continue
                 tc += 1
                 output.write(line + "\n\n")
-                print(line + "AT: LINE" + str(lc))
+                print(line + "    AT: LINE " + str(lc))
         
             output.write("------OUTPUT FILE FINISHED------")
         
@@ -86,7 +86,7 @@ for line in fileHandle:
     if not str(trm) in line: 
         continue
     tc += 1
-    print(str(line) + "AT: LINE" + str(lc))
+    print(str(line) + "    AT: LINE " + str(lc))
 
 
 print("\nFound", tc, "terms \n In", lc, "lines \n From location", fn, "\n")
