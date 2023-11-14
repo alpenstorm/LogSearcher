@@ -1,6 +1,7 @@
 # files
 files/
 *.log
+*.lsout
 
 # macos
 *.DS_Store
