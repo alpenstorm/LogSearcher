@@ -32,7 +32,6 @@ if you have issues with this program, you can contact me on Discord, my tag is a
 ---------------------------------------------------
 if you run out of space, use a program such as [Tabby](https://tabby.sh/) to read large files (if you're not using file exporting, which is recommended), as the default Windows terminal runs out of space pretty quickly!
 
-The GUI version supports:
-Windows (tested, works)
-macOS (tested, does not work)
+The GUI version supports: Windows (tested, works),
+macOS (tested, does not work),
 Linux (untested)
