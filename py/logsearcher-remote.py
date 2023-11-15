@@ -36,7 +36,7 @@ if flcr == 'y':
     foldern = input("File Location: ")
 
     try:
-        with open(foldern + filen + ".lsout", "w") as output:
+        with open(foldern + filen, "w") as output:
             output.write("------OUTPUT FILE CREATED------"+ "\n\n")
 
             for line in fileHandle:
@@ -60,7 +60,7 @@ if flcr == 'y':
     except:
         os.mkdir(foldern)
 
-        with open(foldern + filen + ".lsout", "w") as output:
+        with open(foldern + filen, "w") as output:
             output.write("------OUTPUT FILE CREATED------"+ "\n\n")
 
             for line in fileHandle:
