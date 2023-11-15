@@ -14,7 +14,7 @@ def local_down():
     subprocess.run(["python", "py/logsearcher-local-gui.py"])
 
 def remote_down():
-    subprocess.run(["python", "py/logsearcher-local.py"])
+    subprocess.run(["python", "py/logsearcher-remote-gui.py"])
 
 # buttons
 button1 = tk.Button(root, text="Local", height=2, width=12, font=("Arial", 16), command=local_down)

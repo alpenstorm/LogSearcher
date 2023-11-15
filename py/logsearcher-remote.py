@@ -40,7 +40,7 @@ if flcr == 'y':
             output.write("------OUTPUT FILE CREATED------"+ "\n\n")
 
             for line in fileHandle:
-                line = line.rstrip()
+                line = line.decode().strip()
                 lc += 1
                 if not trm in line:
                     continue
@@ -50,7 +50,7 @@ if flcr == 'y':
         
             output.write("------OUTPUT FILE TERMINATED------")
 
-            print("\nFound", tc, "terms \n In", lc, "lines \n From location", fn, "\n")
+            print("\nFound", tc, "terms \nIn", lc, "lines \nFrom location", fn, "\n")
 
             xt = input("Press [Enter] to exit")
         
@@ -64,7 +64,7 @@ if flcr == 'y':
             output.write("------OUTPUT FILE CREATED------"+ "\n\n")
 
             for line in fileHandle:
-                line = line.rstrip()
+                line = line.decode().strip()
                 lc += 1
                 if not trm in line:
                     continue
@@ -74,7 +74,7 @@ if flcr == 'y':
         
             output.write("------OUTPUT FILE TERMINATED------")
 
-            print("\nFound", tc, "terms \n In", lc, "lines \n From location", fn, "\n")
+            print("\nFound", tc, "terms \nIn", lc, "lines \nFrom location", fn, "\n")
 
             xt = input("Press [Enter] to exit")
         
@@ -91,6 +91,6 @@ for line in fileHandle:
     tc += 1
     print(str(line) + "    AT: LINE " + str(lc))
 
-print("\nFound", tc, "terms \n In", lc, "lines \n From location", fn, "\n")
+print("\nFound", tc, "terms \nIn", lc, "lines \nFrom location", fn, "\n")
 
 input("Press [Enter] to exit")

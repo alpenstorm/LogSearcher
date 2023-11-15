@@ -1,5 +1,6 @@
 import os
 import ctypes
+import urllib.request
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import filedialog
@@ -10,20 +11,20 @@ ctypes.windll.shcore.SetProcessDpiAwareness(True)
 #tk window
 root = tk.Tk()
 root.geometry("1280x720")
-root.title("LogSearcher - Local Searcher")
+root.title("LogSearcher - Remote Searcher")
 
 # button functions
-def browseFiles():
-    global filename
-    cwd = os.getcwd()
-    filename = filedialog.askopenfilename(
-        initialdir= cwd,
-        title= "Select a File",
-        filetypes= (("Log Files","*.log"),
-                     ("Text Files", "*.txt"),
-                     ("all files","*."))
-    )
-    submit_searcht()
+# def browseFiles():
+#     global filename
+#     cwd = os.getcwd()
+#     filename = filedialog.askopenfilename(
+#         initialdir= cwd,
+#         title= "Select a File",
+#         filetypes= (("Log Files","*.log"),
+#                      ("Text Files", "*.txt"),
+#                      ("all files","*."))
+#     )
+#     submit_searcht()
 
 def savefiles():
     global sfilename
@@ -43,14 +44,14 @@ def savefiles():
 
 def submit_filep():
     global fn
-    fn = filename
+    fn = file_path_entry.get()
     
     try:
         global fileHandle
-        fileHandle = open(fn, "r", encoding="utf8", errors="ignore")
+        fileHandle = urllib.request.urlopen(fn)
     except:
         messagebox.showerror("Warning", "Could not read file!")
-        #file_path_entry.delete(0, END)
+        file_path_entry.delete(0, END)
         submit_filep(fn)
     
     global w3
@@ -99,7 +100,7 @@ def submit_filenames():
         output.write("------OUTPUT FILE CREATED------"+ "\n\n")
 
         for line in fileHandle:
-            line = line.rstrip()
+            line = line.decode().strip()
             lc += 1
             if trm in line:
                 tc += 1
@@ -120,11 +121,11 @@ def submit_filenames():
             
 
 #tk items
-Label(root, text="File To Open", font=("Arial", 24)).pack(side=tk.TOP, padx=10, pady=10)
-fp_button = Button(root, text="Browse Files", font=("Arial", 18), command=browseFiles).pack(side=tk.TOP, padx=10, pady=10)
-#Button(root, text="Submit", font=("Arial", 18), command=submit_filep).pack(side=tk.TOP, padx=10, pady=10)
-#file_path_entry = tk.Entry(root, width=40, font=("Arial", 16))
-#file_path_entry.pack(side=tk.TOP, padx=10, pady=10)
+Label(root, text="URL To Open", font=("Arial", 24)).pack(side=tk.TOP, padx=10, pady=10)
+#fp_button = Button(root, text="Browse Files", font=("Arial", 18), command=browseFiles).pack(side=tk.TOP, padx=10, pady=10)
+file_path_entry = tk.Entry(root, width=40, font=("Arial", 16))
+file_path_entry.pack(side=tk.TOP, padx=10, pady=10)
+Button(root, text="Submit", font=("Arial", 18), command=submit_searcht).pack(side=tk.TOP, padx=10, pady=10)
 
 
 #main loop
