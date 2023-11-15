@@ -1,5 +1,6 @@
 import os
 import ctypes
+import subprocess
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import filedialog
@@ -116,6 +117,7 @@ def submit_filenames():
             w3.withdraw()
             root.deiconify()
         else:
+            subprocess.run(["python", "../launcher-gui.py"])
             root.destroy()
             
 

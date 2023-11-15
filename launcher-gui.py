@@ -1,8 +1,10 @@
 import subprocess
+import os
 import ctypes
 import tkinter as tk
 
 ctypes.windll.shcore.SetProcessDpiAwareness(True)
+cwd = os.getcwd()
 
 # root window
 root = tk.Tk()
@@ -11,10 +13,10 @@ root.geometry("1280x720")
 
 #functions
 def local_down():
-    subprocess.run(["python", "py/logsearcher-local-gui.py"])
+    exec(open(f'{cwd}\\py\\logsearcher-local-gui.py').read())
 
 def remote_down():
-    subprocess.run(["python", "py/logsearcher-remote-gui.py"])
+    exec(open(f'{cwd}\\py\\logsearcher-remote-gui.py').read())
 
 # buttons
 button1 = tk.Button(root, text="Local", height=2, width=12, font=("Arial", 16), command=local_down)
