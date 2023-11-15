@@ -1,5 +1,8 @@
 import subprocess
+import ctypes
 import tkinter as tk
+
+ctypes.windll.shcore.SetProcessDpiAwareness(True)
 
 # root window
 root = tk.Tk()

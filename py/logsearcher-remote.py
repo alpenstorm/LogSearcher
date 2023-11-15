@@ -48,7 +48,7 @@ if flcr == 'y':
                 output.write(line + "\n\n")
                 print(line + "    AT: LINE " + str(lc))
         
-            output.write("------OUTPUT FILE FINISHED------")
+            output.write("------OUTPUT FILE TERMINATED------")
 
             print("\nFound", tc, "terms \n In", lc, "lines \n From location", fn, "\n")
 
@@ -72,7 +72,7 @@ if flcr == 'y':
                 output.write(line + "\n\n")
                 print(line + "    AT: LINE " + str(lc))
         
-            output.write("------OUTPUT FILE FINISHED------")
+            output.write("------OUTPUT FILE TERMINATED------")
 
             print("\nFound", tc, "terms \n In", lc, "lines \n From location", fn, "\n")
 

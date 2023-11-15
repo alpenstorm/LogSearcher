@@ -18,8 +18,8 @@ def browseFiles():
     filename = filedialog.askopenfilename(
         initialdir= "/",
         title= "Select a File",
-        filetypes= (("Text Files", "*.txt*"),
-                     ("Log Files","*.log*"),
+        filetypes= (("Log Files","*.log*"),
+                     ("Text Files", "*.txt*"),
                      ("all files","*.*"))
     )
     submit_filep()
@@ -29,8 +29,8 @@ def savefiles():
     sfilename = filedialog.asksaveasfile(
         initialdir="/",
         title="Save As:",
-        filetypes= (("Text Files", "*.txt*"),
-                    ("Log Files","*.log*"),
+        filetypes= (("Log Files","*.log*"),
+                     ("Text Files", "*.txt*"),
                     ("LogSearcher Output","*.lsout*"))
     )
     submit_filenames()
@@ -107,7 +107,7 @@ def submit_filenames():
             tc += 1
             output.write(line + "\n\n")
     
-        output.write("------OUTPUT FILE FINISHED------")
+        output.write("------OUTPUT FILE TERMINATED------")
     
         #print("\nFound", tc, "terms \n In", lc, "lines \n From location", fn, "\n")
 
