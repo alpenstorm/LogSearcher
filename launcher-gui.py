@@ -3,6 +3,7 @@ import tkinter as tk
 
 # root window
 root = tk.Tk()
+root.title("LogSearcher - Launcher")
 root.geometry("1280x720")
 
 #functions

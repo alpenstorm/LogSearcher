@@ -45,25 +45,30 @@ def submit_searcht():
     w3.geometry("1280x720")
 
     Label(w3, text="File Name", font=("Arial", 24)).pack(side=tk.TOP, padx=10, pady=10)
+    
     filen_entry = tk.Entry(w3, width=40, font=("Arial", 16))
     filen_entry.pack(side=tk.TOP, padx=10, pady=10)
+
     Label(w3, text="File Location", font=("Arial", 24)).pack(side=tk.TOP, padx=10, pady=10)
+    
     foldern_entry = tk.Entry(w3, width=40, font=("Arial", 16))
     foldern_entry.pack(side=tk.TOP, padx=10, pady=10)
+
     Button(w3, text="Submit", font=("Arial", 18), command=submit_filenames).pack(side=tk.TOP, padx=10, pady=10)
-    
+
     global foldern
     global filen
     foldern = foldern_entry.get()
     filen = filen_entry.get()
+
+
+def submit_filenames():
     
     global lc
     global tc
     lc = 0
     tc = 0
 
-
-def submit_filenames():
     try:
         with open(foldern + filen, "w") as output: #if you want to change the file format that the program exports to, define it here instead of ".lsout". 
             output.write("------OUTPUT FILE CREATED------"+ "\n\n")
@@ -76,9 +81,9 @@ def submit_filenames():
                 tc += 1
                 output.write(line + "\n\n")
         
-            output.write("------OUTPUT FILE TERMINATED------")
+            output.write("------OUTPUT FILE FINISHED------")
         
-            messagebox.showinfo("Terms", ["Found", tc, "terms \n In", lc, "lines \n From location", fn])  
+            #print("\nFound", tc, "terms \n In", lc, "lines \n From location", fn, "\n")
     
     except:
         os.mkdir(foldern)
@@ -94,9 +99,11 @@ def submit_filenames():
                 tc += 1
                 output.write(line + "\n\n")
         
-            output.write("------OUTPUT FILE TERMINATED------")
+            output.write("------OUTPUT FILE FINISHED------")
         
-            messagebox.showinfo("Terms", ["Found", tc, "terms \n In", lc, "lines \n From location", fn])
+            #print("\nFound", tc, "terms \n In", lc, "lines \n From location", fn, "\n")
+
+
 
 #tk items
 Label(root, text="Enter File Path", font=("Arial", 36)).pack(side=tk.TOP, padx=10, pady=10)
