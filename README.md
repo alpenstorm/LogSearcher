@@ -20,6 +20,8 @@
 
 5. after the program is finished with finding the instances, it will prompt to exit
 
+**IMPORTANT NOTICE** the gui version only exports to a file!
+
 ---------------------------------------------------
 # Contact
 ---------------------------------------------------
@@ -29,3 +31,8 @@ if you have issues with this program, you can contact me on Discord, my tag is a
 # Help
 ---------------------------------------------------
 if you run out of space, use a program such as [Tabby](https://tabby.sh/) to read large files (if you're not using file exporting, which is recommended), as the default Windows terminal runs out of space pretty quickly!
+
+The GUI version supports:
+Windows (tested, works)
+macOS (tested, does not work)
+Linux (untested)
