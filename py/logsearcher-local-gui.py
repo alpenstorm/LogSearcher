@@ -15,25 +15,30 @@ root.title("LogSearcher - Local Searcher")
 # button functions
 def browseFiles():
     global filename
+    cwd = os.getcwd()
     filename = filedialog.askopenfilename(
-        initialdir= "/",
+        initialdir= cwd,
         title= "Select a File",
         filetypes= (("Log Files","*.log*"),
                      ("Text Files", "*.txt*"),
                      ("all files","*.*"))
     )
-    submit_filep()
+    submit_searcht()
 
 def savefiles():
     global sfilename
-    sfilename = filedialog.asksaveasfile(
-        initialdir="/",
+    cwd = os.getcwd()
+    sfilename = filedialog.asksaveasfilename(
+        initialdir= cwd,
         title="Save As:",
-        filetypes= (("Log Files","*.log*"),
-                     ("Text Files", "*.txt*"),
-                    ("LogSearcher Output","*.lsout*"))
+        filetypes= (("Log Files",".log"),
+                     ("Text Files", ".txt"),
+                    ("LogSearcher Output",".lsout")),
+        initialfile= "out.log",
+        defaultextension= ".log"
     )
-    submit_filenames()
+    print(sfilename)
+    submit_filep()
 
 
 def submit_filep():
@@ -55,12 +60,10 @@ def submit_filep():
     w2.geometry("1280x720")
 
     Label(w2, text="Enter Search Term", font=("Arial", 24)).pack(side=tk.TOP, padx=10, pady=10)
+    global trm_entry
     trm_entry = tk.Entry(w2, width=40, font=("Arial", 16))
     trm_entry.pack(side=tk.TOP, padx=10, pady=10)
-    Button(w2, text="Submit", font=("Arial", 18), command=submit_searcht).pack(side=tk.TOP, padx=10, pady=10)
-
-    global trm
-    trm = trm_entry.get()
+    Button(w2, text="Submit", font=("Arial", 18), command=submit_filenames).pack(side=tk.TOP, padx=10, pady=10)
 
 def submit_searcht():
     messagebox.showinfo("Notice", "LogSearcher GUI will create a file with the search terms!")
@@ -82,17 +85,11 @@ def submit_searcht():
     Button(w3, text="Browse Files", font=("Arial", 18), command=savefiles).pack(side=tk.TOP, padx=10, pady=10)
     #Button(w3, text="Submit", font=("Arial", 18), command=submit_filenames).pack(side=tk.TOP, padx=10, pady=10)
 
-    global foldern
-    global filen
-    print(sfilename)
-    #foldern = foldern_entry.get()
-    #filen = filen_entry.get()
-
 
 def submit_filenames():
-    
-    global lc
-    global tc
+
+    trm = trm_entry.get()
+
     lc = 0
     tc = 0
 
@@ -102,14 +99,15 @@ def submit_filenames():
         for line in fileHandle:
             line = line.rstrip()
             lc += 1
-            if not trm in line:
+            if trm in line:
+                tc += 1
+                output.write(line + "\n\n")
+            else:
                 continue
-            tc += 1
-            output.write(line + "\n\n")
     
         output.write("------OUTPUT FILE TERMINATED------")
-    
-        #print("\nFound", tc, "terms \n In", lc, "lines \n From location", fn, "\n")
+
+        messagebox.showinfo('Terms Found', f'Found {tc} terms\n In {lc} lines\n From: {filename}')
 
 #tk items
 Label(root, text="File To Open", font=("Arial", 24)).pack(side=tk.TOP, padx=10, pady=10)
