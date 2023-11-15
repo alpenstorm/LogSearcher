@@ -1,4 +1,3 @@
-import subprocess
 import os
 import ctypes
 import tkinter as tk
