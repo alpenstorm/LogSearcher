@@ -12,8 +12,22 @@ root = tk.Tk()
 root.geometry("1280x720")
 root.title("LogSearcher - Local Searcher")
 
+# import buttons
+widget_browse_def = PhotoImage(file='widgets/browse-def.png')
+widget_browse_hover = PhotoImage(file='widgets/browse-hover.png')
+widget_browse_pressed = PhotoImage(file='widgets/browse-pressed.png')
+widget_submit_def = PhotoImage(file='widgets/submit-def.png')
+widget_submit_hover = PhotoImage(file='widgets/submit-hover.png')
+widget_submit_pressed = PhotoImage(file='widgets/submit-click.png')
+widget_searchbar = PhotoImage(file='widgets/search.png')
+
 # button functions
+def changeOnHover(button, imgonhover, imgonleave):
+    button.bind("<Enter>", func=lambda e: button.config(image=imgonhover))
+    button.bind("<Leave>", func=lambda e: button.config(image=imgonleave))
+
 def browseFiles():
+    fp_button.config(image=widget_browse_pressed)
     global filename
     cwd = os.getcwd()
     filename = filedialog.askopenfilename(
@@ -26,6 +40,7 @@ def browseFiles():
     submit_searcht()
 
 def savefiles():
+    w2fp.config(image=widget_browse_pressed)
     global sfilename
     cwd = os.getcwd()
     sfilename = filedialog.asksaveasfilename(
@@ -64,7 +79,11 @@ def submit_filep():
     global trm_entry
     trm_entry = tk.Entry(w3, width=40, font=("Arial", 16))
     trm_entry.pack(side=tk.TOP, padx=10, pady=10)
-    Button(w3, text="Submit", font=("Arial", 18), command=submit_filenames).pack(side=tk.TOP, padx=10, pady=10)
+    global w3submit
+    w3submit = Button(w3, image=widget_submit_def, command=submit_filenames, borderwidth=0)
+    w3submit.pack(side=tk.TOP, padx=10, pady=10)
+    changeOnHover(w3submit, widget_submit_hover, widget_submit_def)
+
 
 def submit_searcht():
     messagebox.showinfo("Notice", "LogSearcher GUI will create a file with the search terms!")
@@ -84,11 +103,17 @@ def submit_searcht():
     #foldern_entry = tk.Entry(w3, width=40, font=("Arial", 16))
     #foldern_entry.pack(side=tk.TOP, padx=10, pady=10)
 
-    Button(w2, text="Browse Files", font=("Arial", 18), command=savefiles).pack(side=tk.TOP, padx=10, pady=10)
+    global w2fp
+    w2fp = Button(w2, image=widget_browse_def, command=savefiles, borderwidth=0)
+    w2fp.pack(side=tk.TOP, padx=10, pady=10)
+    changeOnHover(w2fp, widget_browse_hover, widget_browse_def)
+
     #Button(w3, text="Submit", font=("Arial", 18), command=submit_filenames).pack(side=tk.TOP, padx=10, pady=10)
 
 
 def submit_filenames():
+
+    w3submit.config(image=widget_submit_pressed)
 
     trm = trm_entry.get()
 
@@ -121,11 +146,13 @@ def submit_filenames():
 
 #tk items
 Label(root, text="File To Open", font=("Arial", 24)).pack(side=tk.TOP, padx=10, pady=10)
-fp_button = Button(root, text="Browse Files", font=("Arial", 18), command=browseFiles).pack(side=tk.TOP, padx=10, pady=10)
+fp_button = Button(root, image=widget_browse_def, command=browseFiles, borderwidth=0)
+fp_button.pack(side=tk.TOP, padx=10, pady=10)
 #Button(root, text="Submit", font=("Arial", 18), command=submit_filep).pack(side=tk.TOP, padx=10, pady=10)
 #file_path_entry = tk.Entry(root, width=40, font=("Arial", 16))
 #file_path_entry.pack(side=tk.TOP, padx=10, pady=10)
 
+changeOnHover(fp_button, widget_browse_hover, widget_browse_def)
 
 #main loop
 root.mainloop()

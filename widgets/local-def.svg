@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 325 94" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-317.025,-303.868)">
+        <g id="LOCAL-def" transform="matrix(2.08333,0,0,2.08333,25.3581,-789.882)">
+            <path id="Base" d="M296,530L296,565C296,567.76 293.76,570 291,570L145,570C142.24,570 140,567.76 140,565L140,530C140,527.24 142.24,525 145,525L291,525C293.76,525 296,527.24 296,530ZM295.52,530C295.52,527.505 293.495,525.48 291,525.48L145,525.48C142.505,525.48 140.48,527.505 140.48,530L140.48,565C140.48,567.495 142.505,569.52 145,569.52L291,569.52C293.495,569.52 295.52,567.495 295.52,565L295.52,530Z" style="fill:rgb(0,129,213);"/>
+            <g transform="matrix(1,0,0,1,10.9787,0.764128)">
+                <g id="Normal" transform="matrix(1,0,0,1,217.871,552.676)">
+                    <g transform="matrix(15,0,0,15,24.5947,0)">
+                    </g>
+                    <text x="-24.595px" y="0px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:15px;fill:rgb(0,130,213);">LOCAL</text>
+                </g>
+                <g id="File-Icon" serif:id="File Icon" transform="matrix(0.69343,0,0,0.69343,-560.844,-1650.05)">
+                    <path d="M1071,3156L1078,3163L1071,3163L1071,3156ZM1069,3162C1069,3163.66 1070.34,3165 1072,3165L1078,3165L1078,3177C1078,3178.66 1076.66,3180 1075,3180L1060,3180C1059.17,3180 1058.46,3179.71 1057.88,3179.12C1057.29,3178.54 1057,3177.83 1057,3177L1057,3159C1057,3157.34 1058.34,3156 1060,3156L1069,3156L1069,3162Z" style="fill:rgb(6,133,214);"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
