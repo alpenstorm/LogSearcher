@@ -41,7 +41,7 @@ changeOnHover(button1, widget_local_hover, widget_local_def)
 changeOnHover(button2, widget_remote_hover, widget_remote_def)
 
 # label
-label = tk.Label(root, text="LogSearcher", font=("Arial", 48, "bold"))
+label = tk.Label(root, text="LogSearcher", font=("Roboto", 48, "bold"))
 
 # gui packing
 label.pack(side=tk.TOP, padx=10, pady=10)

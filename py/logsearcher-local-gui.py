@@ -19,7 +19,7 @@ widget_browse_pressed = PhotoImage(file='widgets/browse-pressed.png')
 widget_submit_def = PhotoImage(file='widgets/submit-def.png')
 widget_submit_hover = PhotoImage(file='widgets/submit-hover.png')
 widget_submit_pressed = PhotoImage(file='widgets/submit-click.png')
-widget_searchbar = PhotoImage(file='widgets/search.png')
+#widget_searchbar = PhotoImage(file='widgets/search.png') #commented out because searchbar doesn't work - might readd later?
 
 # button functions
 def changeOnHover(button, imgonhover, imgonleave):
@@ -75,9 +75,9 @@ def submit_filep():
     w3.title("LogSearcher - Local Searcher")
     w3.geometry("1280x720")
 
-    Label(w3, text="Enter Search Term", font=("Arial", 24)).pack(side=tk.TOP, padx=10, pady=10)
+    Label(w3, text="Enter Search Term", font=("Roboto", 24)).pack(side=tk.TOP, padx=10, pady=10)
     global trm_entry
-    trm_entry = tk.Entry(w3, width=40, font=("Arial", 16))
+    trm_entry = tk.Entry(w3, width=40, font=("Roboto", 16))
     trm_entry.pack(side=tk.TOP, padx=10, pady=10)
     global w3submit
     w3submit = Button(w3, image=widget_submit_def, command=submit_filenames, borderwidth=0)
@@ -95,12 +95,12 @@ def submit_searcht():
     w2.title("LogSearcher - Local Searcher")
     w2.geometry("1280x720")
 
-    Label(w2, text="Save File", font=("Arial", 24)).pack(side=tk.TOP, padx=10, pady=10)
+    Label(w2, text="Save File", font=("Roboto", 24)).pack(side=tk.TOP, padx=10, pady=10)
     
-    #filen_entry = tk.Entry(w3, width=40, font=("Arial", 16))
+    #filen_entry = tk.Entry(w3, width=40, font=("Roboto", 16))
     #filen_entry.pack(side=tk.TOP, padx=10, pady=10)
     
-    #foldern_entry = tk.Entry(w3, width=40, font=("Arial", 16))
+    #foldern_entry = tk.Entry(w3, width=40, font=("Roboto", 16))
     #foldern_entry.pack(side=tk.TOP, padx=10, pady=10)
 
     global w2fp
@@ -108,7 +108,7 @@ def submit_searcht():
     w2fp.pack(side=tk.TOP, padx=10, pady=10)
     changeOnHover(w2fp, widget_browse_hover, widget_browse_def)
 
-    #Button(w3, text="Submit", font=("Arial", 18), command=submit_filenames).pack(side=tk.TOP, padx=10, pady=10)
+    #Button(w3, text="Submit", font=("Roboto", 18), command=submit_filenames).pack(side=tk.TOP, padx=10, pady=10)
 
 
 def submit_filenames():
@@ -145,11 +145,11 @@ def submit_filenames():
             
 
 #tk items
-Label(root, text="File To Open", font=("Arial", 24)).pack(side=tk.TOP, padx=10, pady=10)
+Label(root, text="File To Open", font=("Roboto", 24)).pack(side=tk.TOP, padx=10, pady=10)
 fp_button = Button(root, image=widget_browse_def, command=browseFiles, borderwidth=0)
 fp_button.pack(side=tk.TOP, padx=10, pady=10)
-#Button(root, text="Submit", font=("Arial", 18), command=submit_filep).pack(side=tk.TOP, padx=10, pady=10)
-#file_path_entry = tk.Entry(root, width=40, font=("Arial", 16))
+#Button(root, text="Submit", font=("Roboto", 18), command=submit_filep).pack(side=tk.TOP, padx=10, pady=10)
+#file_path_entry = tk.Entry(root, width=40, font=("Roboto", 16))
 #file_path_entry.pack(side=tk.TOP, padx=10, pady=10)
 
 changeOnHover(fp_button, widget_browse_hover, widget_browse_def)
