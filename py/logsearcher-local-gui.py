@@ -27,7 +27,11 @@ def changeOnHover(button, imgonhover, imgonleave):
     button.bind("<Enter>", func=lambda e: button.config(image=imgonhover))
     button.bind("<Leave>", func=lambda e: button.config(image=imgonleave))
 
-def browseFiles():
+def delTempText(e):
+    trm_entry.delete(0, "end")
+    trm_entry.config(fg="black")
+
+def browsefiles():
     fp_button.config(image=widget_browse_pressed)
     global filename
     cwd = os.getcwd()
@@ -38,7 +42,7 @@ def browseFiles():
                      ("Text Files", "*.txt"),
                      ("all files","*."))
     )
-    submit_searcht()
+    ifp_entry.insert(0, filename)
 
 def savefiles():
     w2fp.config(image=widget_browse_pressed)
@@ -53,7 +57,7 @@ def savefiles():
         initialfile= "output.log",
         defaultextension= "*.log"
     )
-    print(sfilename)
+    ofp_entry.insert(0, sfilename)
     submit_filep()
 
 def submit_filep():
@@ -66,9 +70,6 @@ def submit_filep():
     except:
         messagebox.showerror("Warning", "Could not read file!")
         submit_filep(fn)
-
-def submit_searcht():
-    messagebox.showinfo("Notice", "LogSearcher GUI will create a file with the search terms!")
 
 def submit_filenames():
 
@@ -97,9 +98,16 @@ def submit_filenames():
         output.write("------OUTPUT FILE TERMINATED------")
 
         messagebox.showinfo('Terms Found', message= f'Found {tc} terms\nIn {lc} lines\nFrom: {fn}')
-        res = messagebox.askquestion('Search Again?', 'Do you want to search another file?')
+        again = messagebox.askquestion('Search Again?', 'Do you want to search again?')
         
-        if res == "no":
+        if again == "yes":
+            same = messagebox.askquestion('Same File?', 'Same file?')
+            if same == "yes":
+                pass
+            else:
+                ifp_entry.delete(0, "end")
+                ofp_entry.delete(0, "end")
+        else:
             root.destroy()
 
 #tk labels
@@ -111,7 +119,7 @@ ifp       = Label(root, text="Input File Path:", font=("Roboto", 16))
 ofp       = Label(root, text="Output File Path:", font=("Roboto", 16))
 
 #tk buttons
-fp_button = Button(root, image=widget_browse_def, command=browseFiles, borderwidth=0)
+fp_button = Button(root, image=widget_browse_def, command=browsefiles, borderwidth=0)
 w2fp      = Button(root, image=widget_browse_def, command=savefiles, borderwidth=0)
 w3submit  = Button(root, image=widget_submit_def, command=submit_filenames, borderwidth=0)
 
@@ -135,10 +143,15 @@ w2fp.place(x=926, y=225, anchor=W, bordermode=OUTSIDE)
 ofp.place(x=730, y=280, anchor=W, bordermode=OUTSIDE)
 ofp_entry.place(x=895, y=280, anchor=W, bordermode=OUTSIDE)
 
-#group 3 - done
+#group 3
 stl.place(x=178, y=425, anchor=W, bordermode=OUTSIDE)
 trm_entry.place(x=465, y=425, anchor=W, bordermode=OUTSIDE)
 w3submit.place(x=910, y=425, anchor=W, bordermode=OUTSIDE)
+
+#trm_entry cfig
+trm_entry.insert(0, "Search Term...")
+trm_entry.config(fg="gray")
+trm_entry.bind("<FocusIn>", delTempText)
 
 #hovers
 changeOnHover(fp_button, widget_browse_hover, widget_browse_def)
