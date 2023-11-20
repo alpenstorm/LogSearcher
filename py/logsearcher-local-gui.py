@@ -13,13 +13,14 @@ root.geometry("1280x720")
 root.title("LogSearcher - Local Searcher")
 
 # import buttons
-widget_browse_def = PhotoImage(file='widgets/browse-def (Custom).png')
-widget_browse_hover = PhotoImage(file='widgets/browse-hover (Custom).png')
+widget_browse_def     = PhotoImage(file='widgets/browse-def (Custom).png')
+widget_browse_hover   = PhotoImage(file='widgets/browse-hover (Custom).png')
 widget_browse_pressed = PhotoImage(file='widgets/browse-pressed (Custom).png')
-widget_submit_def = PhotoImage(file='widgets/submit-def (Custom).png')
-widget_submit_hover = PhotoImage(file='widgets/submit-def (Custom).png')
+widget_submit_def     = PhotoImage(file='widgets/submit-def (Custom).png')
+widget_submit_hover   = PhotoImage(file='widgets/submit-hover (Custom).png')
 widget_submit_pressed = PhotoImage(file='widgets/submit-click (Custom).png')
-#widget_searchbar = PhotoImage(file='widgets/search.png') #commented out because searchbar doesn't work - might readd later?
+widget_banner         = PhotoImage(file="widgets/banner-local.png")
+#widget_searchbar     = PhotoImage(file='widgets/search.png') #commented out because searchbar doesn't work - might readd later?
 
 # button functions
 def changeOnHover(button, imgonhover, imgonleave):
@@ -75,6 +76,9 @@ def submit_filenames():
 
     trm = trm_entry.get()
 
+    if trm == '':
+        messagebox.showwarning("Warning", "No Search Term!")
+
     lc = 0
     tc = 0
 
@@ -94,42 +98,47 @@ def submit_filenames():
 
         messagebox.showinfo('Terms Found', message= f'Found {tc} terms\nIn {lc} lines\nFrom: {fn}')
         res = messagebox.askquestion('Search Again?', 'Do you want to search another file?')
-
-        if res == 'yes':
-            root.deiconify()
-        else:
+        
+        if res == "no":
             root.destroy()
-            
 
 #tk labels
-lsl       = Label(root, text="Local Searcher", font=("Roboto,", 56))
+lsl       = Label(root, image=widget_banner)
 fto       = Label(root, text="File To Open", font=("Roboto", 24))
 sfl       = Label(root, text="File to Save", font=("Roboto", 24))
-stl       = Label(root, text="Enter Search Term", font=("Roboto", 24))
+stl       = Label(root, text="Enter Search Term:", font=("Roboto", 24))
+ifp       = Label(root, text="Input File Path:", font=("Roboto", 16))
+ofp       = Label(root, text="Output File Path:", font=("Roboto", 16))
 
 #tk buttons
 fp_button = Button(root, image=widget_browse_def, command=browseFiles, borderwidth=0)
-w3submit  = Button(root, image=widget_submit_def, command=submit_filenames, borderwidth=0)
 w2fp      = Button(root, image=widget_browse_def, command=savefiles, borderwidth=0)
+w3submit  = Button(root, image=widget_submit_def, command=submit_filenames, borderwidth=0)
 
-# tk entry
-trm_entry = tk.Entry(root, width=40, font=("Roboto", 16))
+#tk entries
+trm_entry = tk.Entry(root, width=24, font=("Roboto", 24))
+ifp_entry = tk.Entry(root, width=18, font=("Roboto", 16))
+ofp_entry = tk.Entry(root, width=16, font=("Roboto", 16))
 
 # top label
 lsl.pack(side=tk.TOP)
 
-#group 1
-fto.pack(side=tk.LEFT, padx=10, pady=10, anchor=CENTER)
-fp_button.pack(side=tk.LEFT, padx=10, pady=10, anchor=CENTER)
+# group 1
+fto.place(x=178, y=225, anchor=W, bordermode=OUTSIDE)
+fp_button.place(x=380, y=225, anchor=W, bordermode=OUTSIDE)
+ifp.place(x=177, y=280, anchor=W, bordermode=OUTSIDE)
+ifp_entry.place(x=325, y=280, anchor=W, bordermode=OUTSIDE)
 
 #group 2
-sfl.pack(side=tk.LEFT, padx=10, pady=10, anchor=S)
-w2fp.pack(side=tk.LEFT, padx=10, pady=10, anchor=S)
+sfl.place(x=730, y=225, anchor=W, bordermode=OUTSIDE)
+w2fp.place(x=926, y=225, anchor=W, bordermode=OUTSIDE)
+ofp.place(x=730, y=280, anchor=W, bordermode=OUTSIDE)
+ofp_entry.place(x=895, y=280, anchor=W, bordermode=OUTSIDE)
 
-#group 3
-stl.pack(side=tk.BOTTOM, padx=10, pady=10, anchor=S)
-trm_entry.pack(side=tk.BOTTOM, padx=10, pady=10, anchor=S)
-w3submit.pack(side=tk.BOTTOM, padx=10, pady=10, anchor=S)
+#group 3 - done
+stl.place(x=178, y=425, anchor=W, bordermode=OUTSIDE)
+trm_entry.place(x=465, y=425, anchor=W, bordermode=OUTSIDE)
+w3submit.place(x=910, y=425, anchor=W, bordermode=OUTSIDE)
 
 #hovers
 changeOnHover(fp_button, widget_browse_hover, widget_browse_def)
