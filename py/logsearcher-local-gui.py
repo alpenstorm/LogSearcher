@@ -3,6 +3,7 @@ import ctypes
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import filedialog
+from winsound import *
 from tkinter import *
 
 ctypes.windll.shcore.SetProcessDpiAwareness(True)
@@ -11,6 +12,7 @@ ctypes.windll.shcore.SetProcessDpiAwareness(True)
 root = tk.Tk()
 root.geometry("1280x720")
 root.title("LogSearcher - Local Searcher")
+
 
 # import buttons
 widget_browse_def     = PhotoImage(file='widgets/browse-def (Custom).png')
@@ -23,6 +25,9 @@ widget_banner         = PhotoImage(file="widgets/banner-local.png")
 #widget_searchbar     = PhotoImage(file='widgets/search.png') #commented out because searchbar doesn't work - might readd later?
 
 # button functions
+def playSound():
+    PlaySound('sound/sound_btn.wav', SND_FILENAME)
+
 def changeOnHover(button, imgonhover, imgonleave):
     button.bind("<Enter>", func=lambda e: button.config(image=imgonhover))
     button.bind("<Leave>", func=lambda e: button.config(image=imgonleave))
@@ -32,6 +37,7 @@ def delTempText(e):
     trm_entry.config(fg="black")
 
 def browsefiles():
+    playSound()
     fp_button.config(image=widget_browse_pressed)
     global filename
     cwd = os.getcwd()
@@ -45,6 +51,7 @@ def browsefiles():
     ifp_entry.insert(0, filename)
 
 def savefiles():
+    playSound()
     w2fp.config(image=widget_browse_pressed)
     global sfilename
     cwd = os.getcwd()
@@ -72,9 +79,8 @@ def submit_filep():
         submit_filep(fn)
 
 def submit_filenames():
-
+    playSound()
     w3submit.config(image=widget_submit_pressed)
-
     trm = trm_entry.get()
 
     if trm == '':
