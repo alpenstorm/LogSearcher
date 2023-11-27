@@ -4,7 +4,11 @@ import subprocess
 import tkinter as tk
 from tkinter import PhotoImage
 
-ctypes.windll.shcore.SetProcessDpiAwareness(True)
+try:
+    ctypes.windll.shcore.SetProcessDpiAwareness(True)
+except:
+    pass    
+    
 cwd = os.getcwd()
 
 # root window

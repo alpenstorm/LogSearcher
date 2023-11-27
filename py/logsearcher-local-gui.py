@@ -3,10 +3,10 @@ import ctypes
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import filedialog
-from winsound import *
 from tkinter import *
 
 try:
+    from winsound import *
     ctypes.windll.shcore.SetProcessDpiAwareness(True)
 except:
     pass
@@ -28,8 +28,12 @@ widget_banner         = PhotoImage(file="widgets/banner-local.png")
 #widget_searchbar     = PhotoImage(file='widgets/search.png') #commented out because searchbar doesn't work - might readd later?
 
 # button functions
+
 def playSound():
-    PlaySound('sound/sound_btn.wav', SND_FILENAME)
+    try:
+        PlaySound('sound/sound_btn.wav', SND_FILENAME)
+    except:
+        pass
 
 def changeOnHover(button, imgonhover, imgonleave):
     button.bind("<Enter>", func=lambda e: button.config(image=imgonhover))
