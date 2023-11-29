@@ -125,8 +125,8 @@ def submit_filenames():
 
 #tk labels
 lsl       = Label(root, image=widget_banner)
-fto       = Label(root, text="File To Open", font=("Roboto", 24))
-sfl       = Label(root, text="File to Save", font=("Roboto", 24))
+fto       = Label(root, text="File To Open:", font=("Roboto", 24))
+sfl       = Label(root, text="File to Save:", font=("Roboto", 24))
 stl       = Label(root, text="Enter Search Term:", font=("Roboto", 24))
 ifp       = Label(root, text="Input File Path:", font=("Roboto", 16))
 ofp       = Label(root, text="Output File Path:", font=("Roboto", 16))
@@ -138,28 +138,28 @@ w3submit  = Button(root, image=widget_submit_def, command=submit_filenames, bord
 
 #tk entries
 trm_entry = tk.Entry(root, width=24, font=("Roboto", 24))
-ifp_entry = tk.Entry(root, width=18, font=("Roboto", 16))
-ofp_entry = tk.Entry(root, width=16, font=("Roboto", 16))
+ifp_entry = tk.Entry(root, width=15, font=("Roboto", 16))
+ofp_entry = tk.Entry(root, width=12, font=("Roboto", 16))
 
 # top label
 lsl.pack(side=tk.TOP)
 
 # group 1
-fto.place(x=178, y=225, anchor=W, bordermode=OUTSIDE)
-fp_button.place(x=380, y=225, anchor=W, bordermode=OUTSIDE)
-ifp.place(x=177, y=280, anchor=W, bordermode=OUTSIDE)
-ifp_entry.place(x=325, y=280, anchor=W, bordermode=OUTSIDE)
+fto.place(relx=0.075, rely=0.315, anchor=W, bordermode=OUTSIDE)
+fp_button.place(relx=0.275, rely=0.315, x=5, anchor=W, bordermode=OUTSIDE)
+ifp.place(relx=0.075, rely=0.41, anchor=W, bordermode=OUTSIDE)
+ifp_entry.place(relx=0.275, rely=0.41, x=-60, anchor=W, bordermode=OUTSIDE)
 
 #group 2
-sfl.place(x=730, y=225, anchor=W, bordermode=OUTSIDE)
-w2fp.place(x=926, y=225, anchor=W, bordermode=OUTSIDE)
-ofp.place(x=730, y=280, anchor=W, bordermode=OUTSIDE)
-ofp_entry.place(x=895, y=280, anchor=W, bordermode=OUTSIDE)
+sfl.place(relx=0.6, rely=0.315, x=-32, anchor=W, bordermode=OUTSIDE)
+w2fp.place(relx=0.785, rely=0.315, x=-32, anchor=W, bordermode=OUTSIDE)
+ofp.place(relx=0.6, rely=0.41, anchor=W, x=-32, bordermode=OUTSIDE)
+ofp_entry.place(relx=0.785, rely=0.41, anchor=W, x=-50, bordermode=OUTSIDE)
 
 #group 3
-stl.place(x=178, y=425, anchor=W, bordermode=OUTSIDE)
-trm_entry.place(x=465, y=425, anchor=W, bordermode=OUTSIDE)
-w3submit.place(x=910, y=425, anchor=W, bordermode=OUTSIDE)
+stl.place(relx=0.075, rely=0.6, anchor=W, bordermode=OUTSIDE)
+trm_entry.place(relx=0.3555, rely=0.6, anchor=W, bordermode=OUTSIDE)
+w3submit.place(relx=0.785, rely=0.6, anchor=W, x=-7.5, bordermode=OUTSIDE)
 
 #trm_entry cfig
 trm_entry.insert(0, "Search Term...")
