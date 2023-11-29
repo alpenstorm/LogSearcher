@@ -10,6 +10,7 @@ try:
     ctypes.windll.shcore.SetProcessDpiAwareness(True)
 except:
     pass
+    
 #tk window
 root = tk.Tk()
 root.geometry("1280x720")
