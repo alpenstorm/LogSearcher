@@ -5,7 +5,10 @@ from tkinter import messagebox
 from tkinter import filedialog
 from tkinter import *
 
-ctypes.windll.shcore.SetProcessDpiAwareness(True)
+try:
+    ctypes.windll.shcore.SetProcessDpiAwareness(True)
+except: 
+    pass
 
 #tk window
 root = tk.Tk()
