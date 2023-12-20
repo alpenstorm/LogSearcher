@@ -1,7 +1,13 @@
 # files
-files/
 *.log
 *.lsout
 
-# macos
+# test folders
+files/
+conf/
+root/
+
+# os index files
 *.DS_Store
+Thumbs.db
+.vscode/
