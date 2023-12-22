@@ -1,16 +1,8 @@
-# This program is made for searching large log files for errors.
-#---------------------------------------------------
-# HOW TO USE
-#---------------------------------------------------
-# 1. when the program asks for a file location, paste in the location of the log file you want to test. if it is an invalid file, the program will quit
-# 2. input the search term, eg. the error you want to find
-# 3. the program will ask to create a file containing the search hits. if you want to do so, refer to step 3-a
-# 3-a. the program will ask for a file name. files are automatically created in .lsoutput, so name the file without an extention. if you want to disable this, check the comment on line 38
-# 3-b. the program will ask for a folder in which to save the file. if the folder specified is not available, the program will create one
-# 4. the program will find all the instances of that error message in the log file. if there are no instances of the term, you will be prompted to exit
-# 5. after the program is finished with finding the instances, it will prompt to exit
+# LogSearcher is a program that searches large log files
+# it can also index files, strip white space, etc.
+# i've written explanations for the functions in the comments in the file 
 
-# made by alpenstorm
+# cheers and happy searching, alpenstorm
 
 import os
 import json
@@ -19,24 +11,28 @@ import json
 global rootfolder
 global indexfolder
 global stripfolder
-global settings 
+global settings  
 
-global mode
-mode = 'debug' # mode controls some prints throughout the program if mode is 'debug', change it to 'release' to turn off the prints ¯\_(ツ)_/¯ 
+#---------------------------------------------------
+# Pre-run checks
+#---------------------------------------------------
 
-# pre-run checks
+# there are three pairs of try-excepts for the checks
+# the first one (under this comment) checks if the "conf/" folder exists. if it doesn't, it will create one (conf is where we store the config file)
 try:
     os.listdir("conf/")
 except:
     print('NO CONFIG FOLDER FOUND AT conf/, CREATING...')
     os.mkdir("conf/")
 
+# this one checks if the config file exists. if it doesn't, it will create one
 try:
     with open('conf/config.json', 'r') as f:
         settings = json.load(f)
     rootfolder  = settings["rootfolder"]
     indexfolder = settings["indexfolder"]
     stripfolder = settings["stripfolder"]
+    f.close()
 except:
     print('NO CONFIG FILE FOUND AT "conf/config.json, CREATING...')
     data = {"rootfolder": "root/", "indexfolder": "index/", "stripfolder": "stripped/"}
@@ -48,8 +44,10 @@ except:
     rootfolder  = settings["rootfolder"]
     indexfolder = settings["indexfolder"]
     stripfolder = settings["stripfolder"]
+    w.close()
+    r.close()
 
-
+# and this one checks if the root folders exist
 try:
     os.listdir(rootfolder)
     os.listdir(rootfolder+indexfolder)
@@ -62,20 +60,40 @@ except:
     print(f"NO STRIP FOLDER FOUND AT {stripfolder}, CREATING...")
     os.mkdir(rootfolder+stripfolder)
 
-# functions
+#---------------------------------------------------
+# Functions
+#---------------------------------------------------
+    
+# the clear function clears the terminal when called
 def clear():
     try:
         os.system('cls')
     except:
         os.system('clear')
 
-def inputFile(): 
+# the inputFile function asks for a file (fn) and checks if it exists
+def inputFile() -> str: 
     global fn
+    global fileHandle
     fn = input("Enter File Location: ")
+
+    try:
+        fileHandle = open(fn, "r", encoding="utf8", errors="ignore") 
+    except:
+        xt = input("Error, file not found. \nTry again? [Y,N] \n:")
+
+        if xt == "Y" or xt == "y": 
+            clear()
+            inputFile()
+            read()
+        elif xt == "n" or xt == "N": options()
+    
+    w.close()
     clear()
 
+# the options function shows an options menu that starts the program. from there, you can access everything else
 def options():
-    ops = input("[A] to add or change a file (do this before searching, reading, or editing to avoid NO FILE errors) \n[S] to search the file \n[R] to read the file \n[RS] to refresh settings (do this after changing the save folder for indexes and strips) \n[E] to edit the file \n[B] to go back \n[Q] to quit \n:")
+    ops = input("[A] to add or change a file (do this before searching, reading, or editing to avoid NO FILE errors) \n[S] to search the file \n[R] to read the file \n[C] to change root folder for indexes and strips \n[E] to edit the file \n[B] to go back \n[Q] to quit \n:")
 
     if ops == "r" or ops == "R": 
         clear()
@@ -96,22 +114,16 @@ def options():
             with open("launcher.py") as orig: exec(orig.read())
         except: 
             with open("../launcher.py") as orig: exec(orig.read())
-    elif ops == "rs" or ops == "RS" or ops == "rS" or ops == "Rs":
+    elif ops == "c" or ops == "C":
         clear()
-        try: 
-            with open("py/logsearcher-local.py") as orig: exec(orig.read())
-        except: 
-            with open("logsearcher-local.py") as orig: exec(orig.read())   
+        changeFolder()
     elif ops == "q" or ops == "Q": quit()
 
+# the edit function opens a menu from which you can select an editor to open the current file (fn)
 def edit():
 
-    try:
-        print(f"Current File: {fn.split('/', 1)[1]}")
-    except:
-        print(f"Current File: {fn}")
+    print(f"Current File: {os.path.basename(fn)}")
 
-        
     ops = input("[V] to use Vim (if installed) \n[NV] to use Neovim (if installed) \n[N] to use Notepad (if using Windows) \n[C] to use VS Code (if installed) \n[B] to go back \n:")
     if ops == "v" or ops == "V": 
         os.system('vim ' + fn)
@@ -133,6 +145,7 @@ def edit():
         clear()
         options()
 
+# the changeFolder function lets you change the output folder for the index and strip files
 def changeFolder():
     rootfolder  = str(input("Enter Location for Root folder ([I] for info): "))
     if rootfolder == "i" or rootfolder == "I":
@@ -171,7 +184,8 @@ def changeFolder():
             changeFolder()
     indexfolder = rootfolder + str(input('Enter Location for Index folder ("indexfolder/"): '))
     stripfolder = rootfolder + str(input('Enter Location for Strip folder ("stripfolder/"): '))
-    
+
+
     try:
         os.listdir(rootfolder)
         os.listdir(rootfolder+indexfolder)
@@ -196,7 +210,7 @@ def changeFolder():
     except: 
         with open("logsearcher-local.py") as orig: exec(orig.read())  
 
-
+# the indexFile function takes two strings (input_file and output_file). it indexes input_file and exports a json output_file with the words in the file and how many there are to root/index
 def indexFile(input_file: str, output_file: str):
     
     try:
@@ -226,6 +240,7 @@ def indexFile(input_file: str, output_file: str):
     with open(output_file, "w") as f:
         f.write(json.dumps(sorted_dict, indent=4))
 
+# the stripWhiteSpace function takes two strings (input_file and output_file). it strips the white space from input_file and exports a text file (the same format as the input_file) into root/stripped
 def stripWhiteSpace(input_file: str, output_file: str):
     
     try:
@@ -244,56 +259,88 @@ def stripWhiteSpace(input_file: str, output_file: str):
     with open(output_file, "w") as f:
         f.write(content)
 
-def readActions():
-    xt = input("[I] to index this file \n[W] to strip white space in this file \n[C] to change root folder \n[B] to go back \n:")
+# the clean function takes two strings (input_file and output_file). it cleans up the json that you indexed exports the new one to root/index
+def clean(input_file: str, output_file: str):    
+    xt = input("Do you want to remove underscores and dashes? [Y,N] \n:")
 
-    try:
-        localfn = fn.split('/', 1)[1]
-    except:
-        localfn = fn
+    if xt == 'y' or 'Y':
+        with open(input_file, "r") as f_in:
+            with open(output_file, "w") as f_out:
+                f_out.write("{")
+                for line in f_in:
+                    line = "".join(c for c in line if c not in "{}[]/|_-`~;<>^()")
+                    f_out.write(line)
+                f_out.write("}")
+    elif xt == 'n' or 'N':
+        with open(input_file, "r") as f_in:
+            with open(output_file, "w") as f_out:
+                f_out.write("{")
+                for line in f_in:
+                    line = "".join(c for c in line if c not in "{}[]/|`~;<>^()")
+                    f_out.write(line)
+                f_out.write("}")
 
+    with open(output_file, "r") as f:
+        data = json.load(f)
+
+    unique_data = {}
+
+    for key, value in data.items():
+        if key not in unique_data:
+            unique_data[key] = value
+
+    sorted_list = sorted(unique_data.items(), key=lambda x: x[1], reverse=True)
+    sorted_dict = {k: v for k, v in sorted_list}
+
+    with open(output_file, "w") as f:
+        json.dump(sorted_dict, f, indent=4)
+
+# the indexMenu function is an options menu for indexing
+def indexMenu():
+    xt = input("[I] to index the file regularly \n[C] to clean an existing index file \n[B] to go back \n:")
+
+    localfn = os.path.basename(fn)
 
     if xt == "i" or xt == "I": 
         clear()
         indexFile(fn, f"{rootfolder}{indexfolder}" + f"{localfn.split('.', 1)[0]}-index.json")
+    elif xt == "c" or xt == "C":
+        clear()
+        clean(fn, f"{rootfolder}{indexfolder}" + f"{localfn.split('.', 1)[0]}-clean.json")
+    elif xt == "b" or xt == "B":
+        clear()
+        readActions()
+
+# the readActions function is an options menu for indexing and stripping files
+def readActions():
+    xt = input("[I] to index this file \n[W] to strip white space in this file \n[B] to go back \n:")
+
+    localfn = os.path.basename(fn)
+    
+    if xt == "i" or xt == "I": 
+        clear()
+        indexMenu()
     elif xt == "w" or xt == "W":
         clear()
         stripWhiteSpace(fn, f"{rootfolder}{stripfolder}" + f"{localfn.split('.', 1)[0]}-strip.{localfn.split('.', 1)[1]}")
-    elif xt == "c" or xt == "C":
-        clear()
-        changeFolder()
     elif xt == "b" or xt == "B":
         clear()
         options()
 
+# the read function takes fn and prints it out into the terminal
 def read():
     
-    try:
-        print(f"Current File: {fn.split('/', 1)[1]}")
-    except:
-        print(f"Current File: {fn}")
-
+    print(f"Current File: {os.path.basename(fn)}")
     readActions()
-    
-    try:
-        fileHandle = open(fn, "r", encoding="utf8", errors="ignore") 
-    except:
-        xt = input("Error, file not found. \nTry again? [Y,N] \n:")
-
-        if xt == "Y" or xt == "y": 
-            clear()
-            inputFile()
-            read()
-        elif xt == "n" or xt == "N": options()
     
     lc = 0
 
     for line in fileHandle:
         line = line.rstrip()
         lc += 1
-        print(line + "    AT: LINE " + str(lc))
-    
-    xt = input("[RN] to read a new file \n[B] to go back \n:")
+        print(str(line) + "    AT: LINE " + str(lc))
+
+    xt = input("\n\n[RN] to read a new file \n[B] to go back \n:")
     if xt == "RN" or xt == "rn" or xt == "Rn" or xt == "rN": 
         clear()
         inputFile()
@@ -302,11 +349,9 @@ def read():
         clear()
         options()
 
+# the beforeSearch function determines if the file you want to search is an index or regular file
 def beforeSearch():
-    try:
-        print(f"Current File: {fn.split('/', 1)[1]}")
-    except:
-        print(f"Current File: {fn}")
+    print(f"Current File: {os.path.basename(fn)}")
 
     q = input("Is this a regular file or an index? [R,I] \n[C] to change file \n:")
 
@@ -324,19 +369,8 @@ def beforeSearch():
         clear()
         options()    
 
+# the searchIndex function searches the index file you input (fn)
 def searchIndex():
-    try:
-        with open(fn, "r", encoding="utf8", errors="ignore") as fileHandle:
-            data = json.load(fileHandle)
-    except:
-        xt = input("Error, file not found. \nTry again? [Y,N] \n:")
-
-        if xt == "Y" or xt == "y": 
-            clear()
-            inputFile()
-            search()
-        elif xt == "n" or xt == "N": options()
-
     trm = input("Enter Search Term: ")
 
     clear()
@@ -356,17 +390,8 @@ def searchIndex():
         clear()
         options()
 
+# the search function is the classic LogSearcher. it takes an input file, searches it for a term, and can export the search terms and the lines in which they were found
 def search():
-    try:
-        fileHandle = open(fn, "r", encoding="utf8", errors="ignore") 
-    except:
-        xt = input("Error, file not found. \nTry again? [Y,N] \n:")
-
-        if xt == "Y" or xt == "y": 
-            clear()
-            inputFile()
-            search()
-        elif xt == "n" or xt == "N": quit()
 
     trm = input("Enter Search Term: ")
 
@@ -467,6 +492,9 @@ def search():
         clear()
         options()
 
-# start the program
+#---------------------------------------------------
+# Start the program
+#---------------------------------------------------
+
 fn = "empty"
 options()
