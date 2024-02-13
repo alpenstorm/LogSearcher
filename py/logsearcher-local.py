@@ -88,7 +88,6 @@ def inputFile() -> str:
             read()
         elif xt == "n" or xt == "N": options()
     
-    w.close()
     clear()
 
 # the options function shows an options menu that starts the program. from there, you can access everything else
