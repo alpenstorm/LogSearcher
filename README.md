@@ -27,11 +27,17 @@ the launcher will give you two options: local and remote.
   2. The program will find the search term in the index file and print it out.
 
  [R]: reads a file. it asks to index or strip white space in a file.
+ 
  [I]: indexes the input file. asks for a regular file or a file you want to clean. if you created an index before, you NEED to clean it so that you remove duplicate keys. exports files as *{filename}-index.{file extention}* or *{filename}-index-clean.{file extention}* in *root/index*
+ 
  [S]: strips white space in the target file and exports it as *{filename}-strip.{file extention}* in *root/strip*
+ 
  [C]: changes the root folder for indexes and strips. further explanation on usage in the program
+ 
  [E]: edit the file in an external editor, options are: **[V]: Vim**, **[NV]: Neovim**, **[N]: Notepad**, **[C]: VS Code**
+ 
  [B]: goes back to launcher
+ 
  [Q]: quits the program
 
 # Contact
