@@ -174,7 +174,8 @@ def changeFolder():
                         |        |-- something-strip.log (strip files are in the original format)
                  
                  when creating custom folders from the program, always use "foldername/" instead of "foldername
-                 please keep this basic folder structure or some things might break!!! if they do, delete
+                 
+                please keep this basic folder structure or some things might break!!! if they do, delete
                  "conf/" and "root/" to rebuild them''') 
         
         bck = input("\n\n\n[B] to go back \n:")
